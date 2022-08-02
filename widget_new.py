@@ -9,9 +9,8 @@ import create_link
 import os
 import tkinter as tk
 import tk_html_widgets as tk_html
+
 from elasticsearch import Elasticsearch
-
-
 
 
 
@@ -319,12 +318,14 @@ def search_clicked(entry):
     # assigned in line 26 of this file
     display_rows(result,folder_new)
 
-
+    
 # Closing the tkinter application with Esc button causes problems
 # def close(event):
 #     root.withdraw() # if you want to bring it back
 #     sys.exit() # if you want to exit the entire thing
 # root.bind('<Escape>', close)
+
+
 
 ####################
 ##### RUN CODE #####
