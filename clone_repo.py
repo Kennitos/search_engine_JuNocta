@@ -50,8 +50,8 @@ def scrape_gallery(url):
     # r12   match all links the same as .....github/.../...$
     # r21   match all links the same as .....github.com/.../...+
     # r22   match all links the same as .....github/.../...+
-    # r3    match all links the same as .....github.com/user/?$
-    # r31   match all links the same as .....github/user/?$
+    # r31   match all links the same as .....github.com/user/?$
+    # r32   match all links the same as .....github/user/?$
     # rt_1  findall the links the same as github.com/.../...+
     # rt_2  findall the links the same as github/.../...+
     """
@@ -99,7 +99,7 @@ def scrape_gallery(url):
     r22_list = list(filter(r22.match, not_used))
     r22_trans_list = create_url(r22_list,rt_1,7)
     r31_list = list(filter(r31.match, not_used))
-    # r32_list = list(filter(r32.match, not_used)) # no results
+    # r32_list = list(filter(r32.match, not_used)) # will yield no matches
 
     total_list.extend(r21_list)
     total_list.extend(r22_list)
@@ -277,129 +277,3 @@ def start_cloning(set_repositories,folder_dir):
 ##### RUN CODE #####
 ####################
 print("IMPORTED CLONE_REPO.PY")
-
-
-
-
-# print("Creating a error_list of 'Page not found' github "
-#         "repositories url's... (approx 2 min)")
-# error_list = scan_page_not_found(github_repositories)
-# line 98 / 119
-# error_list = ['https://github.com/blog/2012',
-#  'https://github.com/downloads/notebooks',
-#  'https://github.com/cfangmeier/Small',
-#  'https://github.com/JuliaLang/IJulia',
-#  'https://github.com/yoavram/CS1001',
-#  'https://github.com/raw/master',
-#  'https://github.com/Arn-O/py-gridmancer',
-#  'https://github.com/jakevdp/jakevdp',
-#  'https://github.com/tree/master',
-#  'https://github.com/kernc/backtesting',
-#  'https://github.com/GaelVaroquaux/nilearn_course',
-#  'https://github.com/carljv/cython_testing',
-#  'https://github.com/lgiordani/blog_source']
-
-
-# def scrape_gallery(url):
-#     """Takes a url of a jupyter gallery page, and perform webscraping in order
-#     to return a list of unique url's of github repositories.
-#     """
-#     r  = requests.get(url)
-#     data = r.text
-#     soup = BeautifulSoup(data,features="html.parser")
-#     body = soup.find_all("div", {"class": "markdown-body"})[0]
-#     # using [0] since there is only 1 result of a div with class 'markdown-body'
-#     all_links_in_body = set([link.get('href') for link in body.find_all('a')])
-#
-#     remaining = set()
-#
-#     r1 = re.compile(".*github.com/[a-zA-Z0-9_-]+/[a-zA-Z0-9_-]+$")
-#     r2 = re.compile(".*github.com/[a-zA-Z0-9_-]+/[a-zA-Z0-9_-]+")
-#     r3 = re.compile("github.com/[a-zA-Z0-9_-]+/[a-zA-Z0-9_-]+")
-#     r4 = re.compile(".*github.com/[a-zA-Z0-9_-]+$")
-#     r5 = re.compile(".*/github/")
-#     r6 = re.compile("github/[a-zA-Z0-9_-]+/[a-zA-Z0-9_-]+")
-#     # r1 match all links the same as .....github.com/..../....$
-#     # r2 match all links the same as .....github.com/..../....+
-#     # r3 findall all links the same as github.com/..../....+
-#     # r4 match all links the same as .....github.com/....$
-#     # r5 match all links the same as /github/
-#     # r6 findall all links the same as github/..../....+
-#
-#     # r1
-#     github_repositories = set(filter(r1.match, all_links_in_body))
-#
-#     # r2
-#     all_github_links = set(filter(r2.match, all_links_in_body))
-#     github_repo_remaining = all_github_links - github_repositories
-#     # 'remaining' is the difference between 'links' minus 'repositories'
-#
-#     # r3
-#     # list of list with all matches within a single url
-#     created_github_repos = [r3.findall(line) for line in github_repo_remaining]
-#     # flatten the list of lists to a list
-#     created_github_repos = itertools.chain.from_iterable(created_github_repos)
-#     # add 'https://' to created a valid url
-#     created_github_repos = set(['https://'+url for url in created_github_repos])
-#     github_repositories.update(created_github_repos)
-#     remaining = all_links_in_body - all_github_links
-#
-#     # r4
-#     github_users = set(filter(r4.match, remaining))
-#     remaining = remaining - github_users
-#
-#     # r5
-#     github_links2 = set(filter(r5.match, remaining))
-#
-#     # r6
-#     created_github_repos2 = set(['https://github.com'+
-#     r6.findall(line)[0][6:] for line in github_links2 if r6.findall(line)!=[]])
-#
-#     github_repositories.update(created_github_repos2)
-#
-#     return github_repositories
-
-
-# def scan_page_not_found(repositories_list):
-#     # ################################################### #
-#     # NO LONGER USED REPLACED BY CLONE_REPOSITORIES_NEW() #
-#     # ################################################### #
-#     """Takes a list of github repository url's and checks whether
-#     the repository is an repository or a blank page. Returns a list of
-#     github url's that are a blank page.
-#     """
-#     error_list = []
-#     for url in tqdm.tqdm(list(repositories_list)):
-#         r  = requests.get(url)
-#         data = r.text
-#         soup = BeautifulSoup(data,features="html.parser")
-#         try:
-#             if 'Page not found · GitHub' in soup.title.string:
-#                 error_list.append(url)
-#
-#         except Exception as e:
-#             error_list.append(url)
-#     return error_list
-#
-#
-# def clone_repositories(repositories_list,error_list,folder_dir):
-#     # ################################################### #
-#     # NO LONGER USED REPLACED BY CLONE_REPOSITORIES_NEW() #
-#     # ################################################### #
-#     """Takes a list of repositories and clones the ones that are not in the
-#     error_list. The repositories will be placed in the folder 'folder_dir'.
-#     """
-#     print("Cloning the repositories...")
-#     cwd = os.getcwd()
-#     for url in tqdm.tqdm(repositories_list):
-#         if url not in error_list:
-#             repo_name = "("+url.split('/')[3]+")"+url.split('/')[4]
-#             repo_dir = cwd+'\\'+folder_dir+'\\'+repo_name
-#             if not os.path.exists(folder_dir+'/'+repo_name):
-#                 # skip already downloaded repo
-#                 try:
-#                     Repo.clone_from(url,repo_dir)
-#                 except Exception as e:
-#                     print('Failed for:',repo_name,url)
-#                     print(e)
-#     print("Cloning finished")
