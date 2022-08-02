@@ -2,7 +2,7 @@
 ##### IMPORT MODULES #####
 ##########################
 #import python files in this directory
-# import modules_setup # you can comment this line after ran once
+import modules_setup # you can comment this line after ran once
 import clone_repo
 import local_es
 import local_cell_based
