@@ -113,6 +113,19 @@ def rec_to_actions(df,es_index):
 # ElasticSearch: Specifying types in bulk requests is deprecated
 
 
+def new_rec_to_actions(df,es_index):
+    """New version of rec_to_actions as the old version """
+    actions = [
+      {
+        "_index": es_index,
+        "_id": i,
+        "_source": row
+      }
+      for i,row in enumerate(df.to_dict(orient="records"))
+    ]
+    return actions
+
+
 def index_marks(nrows, chunk_size):
     """Lorem ipsum"""
     return range(1 * chunk_size,
