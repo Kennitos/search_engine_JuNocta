@@ -9,6 +9,7 @@ import json
 import itertools
 import tqdm
 import datetime
+import random
 
 from bs4 import BeautifulSoup
 from git import Repo    # add 'git' module through anaconda navigator +
@@ -19,6 +20,22 @@ from git import Repo    # add 'git' module through anaconda navigator +
 #########################
 ####### FUNCTIONS #######
 #########################
+def create_url(link_list,r_e,split_index):
+    """Takes a list of link and cuts down each link to a valid url to a github
+    repository url using regular expressions. Returns a list of new urls.
+    """
+    pre_string = 'https://github.com/'
+    url_list = []
+    for url in link_list:
+        match = r_e.findall(url)
+        if  match != []:
+            url = pre_string + match[0][split_index:]
+            url_list.append(url)
+        if len(match) > 1:
+            print(match)
+    return url_list
+
+
 def scrape_gallery(url):
     """Takes a url of a jupyter gallery page, and perform webscraping in order
     to return a list of unique url's of valid github repositories. It also
@@ -70,16 +87,17 @@ def scrape_gallery(url):
     # r1 - clean repo
     r11_list = list(filter(r11.match, all_github_links))
     r12_list = list(filter(r12.match, all_github_links))
-    r12_trans_list = create_url(r12_list,rt_1,6)
+    r12_trans_list = create_url(r12_list,rt_1,7)
+
 
     total_list.extend(r11_list)
     total_list.extend(r12_list)
     not_used = [link for link in all_github_links if link not in total_list]
 
     r21_list = list(filter(r21.match, not_used))
-    r21_trans_list = create_url(r21_list,rt_2,10)
+    r21_trans_list = create_url(r21_list,rt_2,11)
     r22_list = list(filter(r22.match, not_used))
-    r22_trans_list = create_url(r22_list,rt_1,6)
+    r22_trans_list = create_url(r22_list,rt_1,7)
     r31_list = list(filter(r31.match, not_used))
     # r32_list = list(filter(r32.match, not_used)) # no results
 
@@ -90,6 +108,7 @@ def scrape_gallery(url):
     used = len(r11_list)+len(r12_list)+len(r21_list)+len(r22_list)+len(r31_list)
 
     return_list.extend(r11_list)
+    print(r21_trans_list)
     return_list.extend(r12_trans_list)
     return_list.extend(r21_trans_list)
     return_list.extend(r22_trans_list)
@@ -112,6 +131,7 @@ def scrape_gallery(url):
     len(r22_trans_list),len(r21_trans_list)+len(r22_trans_list),len(not_used),
     used+len(not_used),len(return_list),len(set(return_list)))
     print(summary)
+    # print(sorted(set(return_list)))
     return sorted(set(return_list))#,summary
 
 
@@ -145,16 +165,16 @@ def clone_repositories(repositories_list,folder_dir):
                         s_dict[repo_name] = {'path':repo_dir, 'url':url}
                         succes +=1
                     except Exception as e:
-                        f_dict[repo_name] = {'type':'error',
+                        f_dict[repo_name] = {'type':'error: cloning failed',
                                                 'message':e,
                                                 'url':url}
                 else:
                     f_dict[repo_name] = {'type':'duplicate',
-                                            'url':url,
-                                            'duplicate':s_dict[repo_name]}
+                                            'url':url}#,
+                                            #'duplicate':s_dict[repo_name]}
 
         except Exception as e:
-            f_dict[repo_name] = {'type':'error2','message':e,'url':url}
+            f_dict[repo_name] = {'type':'error','message':e,'url':url}
 
     count_pnf = len([k for k in f_dict if f_dict[k]['type'] == 'Page not found'])
     # count_error = len([k for k in f_dict if f_dict[k]['type'] == 'error'])
@@ -193,8 +213,9 @@ def valid_check_samplesize(user_input,set_repositories,folder_dir):
             # "repositories url's... (approx 2 min)")
             # error_list = scan_page_not_found(set_repositories)
             print("Cloning sample size of",size)
-            clone_repositories(list(set_repositories)[:size],
-                                folder_dir)
+            random_list = random.sample(set_repositories,size)
+            clone_repositories(random_list,folder_dir)
+            # clone_repositories(list(set_repositories)[:size],folder_dir)
         else:
             print("Choose within the delimiters of 0 and",max_size)
             print(),start_cloning(set_repositories,folder_dir)

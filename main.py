@@ -1,18 +1,18 @@
 ##########################
 ##### IMPORT MODULES #####
 ##########################
+#import python files in this directory
+# import modules_setup # you can comment this line after ran once
+import clone_repo
+import local_es
+import local_cell_based
+import local_file_based
+
 # import python modules
 from elasticsearch import Elasticsearch
 import os
 import sys
 import importlib
-
-# import python files
-import modules_setup # you can comment this line after ran once
-import clone_repo
-import local_es
-import local_cell_based
-import local_file_based
 
 
 
@@ -23,18 +23,14 @@ HOST = 'http://localhost:9200/'
 es_new = Elasticsearch(hosts=[HOST])
 # url_old = "https://github.com/jupyter/jupyter/wiki/A-gallery-of-interesting-Jupyter-Notebooks"
 url_new = "https://github.com/jupyter/jupyter/wiki"
-folder_new = "repos"
 
-choose_dataset = 2
-folder_new = "dataset_{}".format(str(choose_dataset))
-INDEX_CELL = "test_dataset{}_cell".format(str(choose_dataset))
-INDEX_FILE = "test_dataset{}_file".format(str(choose_dataset))
+### IMPORTANT VARIABELE ###
+choose_dataset = "demo" # or "1" or "2" or "3"
+
+folder_new = "dataset_{}".format(choose_dataset)
+INDEX_CELL = "dataset_{}_cell".format(choose_dataset)
+INDEX_FILE = "dataset_{}_file".format(choose_dataset)
 TYPE = "record"
-
-# test variables for demo
-folder_new = "demo"
-INDEX_CELL_TEST = "demo_cell"
-INDEX_FILE_TEST = "demo_file"
 
 
 
@@ -154,13 +150,8 @@ def what_to_do(url,folder,es,es_index1,es_index2,es_type):
 ####################
 ##### RUN CODE #####
 ####################
-# run demo
-create_folder(folder_test)
-what_to_do(url_new,folder_new,es_new,INDEX_CELL_TEST,INDEX_FILE_TEST,TYPE)
-
-# # actual code
-# create_folder(folder_new)
-# what_to_do(url_new,folder_new,es_new,INDEX_CELL,INDEX_FILE,TYPE)
+create_folder(folder_new)
+what_to_do(url_new,folder_new,es_new,INDEX_CELL,INDEX_FILE,TYPE)
 
 
 

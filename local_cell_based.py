@@ -1,15 +1,15 @@
 ##########################
 ##### IMPORT MODULES #####
 ##########################
+# import python files in this directory
+import local_es
+
 # import python modules
 import json
 import tqdm
 import pandas as pd
 import os
 import datetime
-
-# import python files
-import local_es
 
 
 
