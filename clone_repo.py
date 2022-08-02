@@ -108,7 +108,6 @@ def scrape_gallery(url):
     used = len(r11_list)+len(r12_list)+len(r21_list)+len(r22_list)+len(r31_list)
 
     return_list.extend(r11_list)
-    print(r21_trans_list)
     return_list.extend(r12_trans_list)
     return_list.extend(r21_trans_list)
     return_list.extend(r22_trans_list)
@@ -131,7 +130,6 @@ def scrape_gallery(url):
     len(r22_trans_list),len(r21_trans_list)+len(r22_trans_list),len(not_used),
     used+len(not_used),len(return_list),len(set(return_list)))
     print(summary)
-    # print(sorted(set(return_list)))
     return sorted(set(return_list))#,summary
 
 
