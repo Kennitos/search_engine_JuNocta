@@ -11,6 +11,8 @@ import pandas as pd
 import os
 import datetime
 
+from elasticsearch import helpers
+
 
 
 #########################
@@ -190,13 +192,14 @@ def create_file_ES_from_folder(es,folder,file_id,fl_dict,es_index):
     split_size = 500
     for chuck in tqdm.tqdm(local_es.split(file_df_extra, split_size)):
         try:
-            r = es.bulk(local_es.rec_to_actions(chuck,es_index))
-
+#             r = es.bulk(local_es.rec_to_actions(chuck,es_index))
+            helpers.bulk(es,local_es.new_rec_to_actions(chuck,es_index))
         except:
             print('mini_split')
             try:
                 for mini_chuck in tqdm.tqdm(local_es.split(chuck, int(split_size/10))):
-                    r = es.bulk(local_es.rec_to_actions(mini_chuck,es_index))
+#                     r = es.bulk(local_es.rec_to_actions(mini_chuck,es_index))
+                    helpers.bulk(es,local_es.new_rec_to_actions(mini_chuck,es_index))
             except Exception as e:
                 print('failed, skip this df',e)
     return es,file_df_extra
