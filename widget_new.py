@@ -25,14 +25,13 @@ username_pc = path.split('\\')[2] # username_pc = 'kennet'
 # username is always third item, like below:
 # [drive][users]['username'][folder][folder][etc]
 
-choose_dataset = 2
-folder_new = "dataset_{}".format(str(choose_dataset))
-index_cell = "test_dataset{}_cell".format(str(choose_dataset))
-index_file = "test_dataset{}_file".format(str(choose_dataset))
+### IMPORTANT VARIABELE ###
+choose_dataset = "demo" # or "1" or "2" or "3"
 
-folder_new = "demo"
-index_cell = "demo_cell".format(str(choose_dataset))
-index_file = "demo_file".format(str(choose_dataset))
+folder_new = "dataset_{}".format(choose_dataset)
+INDEX_CELL = "dataset_{}_cell".format(choose_dataset)
+INDEX_FILE = "dataset_{}_file".format(choose_dataset)
+TYPE = "record"
 no_results_text = "There are no results for this query..."
 
 
@@ -311,11 +310,11 @@ def search_clicked(entry):
     if radio_v.get() == 1:
         query = create_query.query_string_cellbased(entry,cell_types,
                                                     output_types,True)
-        result = es.search(index=[index_cell],body=query, size=max_res)
+        result = es.search(index=[INDEX_CELL],body=query, size=max_res)
     if radio_v.get() == 2:
         query = create_query.query_string_filebased(entry,cell_types,
                                                     output_types,True)
-        result = es.search(index=[index_file],body=query, size=max_res)
+        result = es.search(index=[INDEX_FILE],body=query, size=max_res)
     ## FOLDER_NEW BELANGRIJKE VARIABELE ##
     # assigned in line 26 of this file
     display_rows(result,folder_new)
