@@ -11,6 +11,8 @@ import pandas as pd
 import os
 import datetime
 
+from elasticsearch import helpers
+
 
 
 #########################
@@ -155,7 +157,8 @@ def create_cell_ES_from_folder(es,folder,file_id,fl_dict,es_index):
     for chuck in tqdm.tqdm(local_es.split(cell_df, split_size)):
         # r = es.bulk(rec_t o_actions(cell_df)) replaced with try/except
         try:
-            r = es.bulk(local_es.rec_to_actions(chuck,es_index))
+#             r = es.bulk(local_es.rec_to_actions(chuck,es_index))
+            helpers.bulk(es,local_es.new_rec_to_actions(chuck,es_index))
         except Exception as e:
             print("\nBulk failed at df cell_id: {}-{}"
                     .format(chuck.cell_id.iloc[0],chuck.cell_id.iloc[-1]))
