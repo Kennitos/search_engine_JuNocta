@@ -1,15 +1,17 @@
 ##########################
 ##### IMPORT MODULES #####
 ##########################
+#import python files in this directory
+import create_query
+import create_link
+
 # import python modules
 import os
 import tkinter as tk
 import tk_html_widgets as tk_html
 from elasticsearch import Elasticsearch
 
-#import python files
-import create_query
-import create_link
+
 
 
 
