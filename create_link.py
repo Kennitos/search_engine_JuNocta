@@ -80,6 +80,25 @@ def user_repo_href(user,repo):
     return user_href,repo_href
 
 
+def create_localhost_link(path):
+    """Takes a location/path as input and returns three strings. It determines the 
+    folder in which create_link.py resides and uses that to split the 
+    given path. The localhost_path string is directory tree with the
+    current_folder as its base. The localhost_path_nw is the almost the 
+    same string, except whitespaces are replaced by '%20' as they will 
+    indicate whitespaces. The local_url string is created to be used as 
+    the actual link the user will click on in the search engine.
+    """
+    current_folder = os.getcwd().split('\\')[-1:][0] 
+    localhost_path = path.split(current_folder)[1]
+    localhost_path_nw = localhost_path.replace(' ','%20') # replace whitespaces
+    
+    local_url = ('<a href= http://localhost:8888/notebooks{} '
+    'target="_blank">{}</a>'.format(localhost_path_nw,localhost_path))
+
+    return localhost_path,localhost_path_nw,local_url
+
+
 
 ####################
 ##### RUN CODE #####
