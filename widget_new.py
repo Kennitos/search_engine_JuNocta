@@ -6,7 +6,7 @@ import create_query
 import create_link
 
 # import python modules
-import os
+# import os # old code - based on using C:\ disk
 import tkinter as tk
 import tk_html_widgets as tk_html
 
@@ -19,8 +19,10 @@ from elasticsearch import Elasticsearch
 #####################
 HOST = 'http://localhost:9200/'
 es = Elasticsearch(hosts=[HOST])
-path = os.getcwd()
-username_pc = path.split('\\')[2] # username_pc = 'kennet'
+
+## old code - based on using C:\ disk ###
+# path = os.getcwd()
+# username_pc = path.split('\\')[2] # username_pc = 'kennet'
 # username is always third item, like below:
 # [drive][users]['username'][folder][folder][etc]
 
@@ -170,13 +172,19 @@ def display_rows(result,folder):#query,max_res):
 
         title = res['_source']['file']
         os_path = res['_source']['location']
-        localhost_path = os_path.split(username_pc)[1]
-        localhost_path_nw = localhost_path.replace(' ','%20')
+        
+        ### old code - based on using C:\ disk ###
+        # localhost_path = os_path.split(username_pc)[1]
+        # localhost_path_nw = localhost_path.replace(' ','%20')
         # in case the filename has whitespace between words / nw = no whitespace
         # (example the ipython-notebooks files of yoavram)
-        local_url = ('<a href= http://localhost:8888/notebooks{} '
-                        'target="_blank">{}</a>'.format(localhost_path_nw,
-                                                        localhost_path))
+        # local_url = ('<a href= http://localhost:8888/notebooks{} '
+        #                'target="_blank">{}</a>'.format(localhost_path_nw,
+        #                                                localhost_path))
+        
+        ### new code - based on current folder ###
+        localhost_path,localhost_path_nw,local_url = create_link.create_localhost_link(os_path)
+        
         github_path = os_path.split(folder)[1]
         github_url,github_url_nw = create_link.path_to_githuburl(github_path)
         github_href = 'file: <a href={} target="_blank">{}</a>'.format(github_url,
