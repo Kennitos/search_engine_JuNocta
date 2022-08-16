@@ -113,12 +113,12 @@ def rec_to_actions(df,es_index):
 # ElasticSearch: Specifying types in bulk requests is deprecated
 
 
-def new_rec_to_actions(df,es_index):
+def new_rec_to_actions(df,es_index,index_in_chunk):
     """New version of rec_to_actions as the old version """
     actions = [
       {
         "_index": es_index,
-        "_id": i,
+        "_id": i+index_in_chunk
         "_source": row
       }
       for i,row in enumerate(df.to_dict(orient="records"))
