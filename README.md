@@ -123,7 +123,7 @@ python main.py
 
 ## Usage
 
-
+#### Interactive start menu
 After the user has run the `main.py` command, the user is met with an interactive shell in which 5 options presented:
 1. Press (1) to run all the following options consecutively: (2), (3), (4)
 2. Press (2) to clone the repositories,
@@ -132,9 +132,13 @@ After the user has run the `main.py` command, the user is met with an interactiv
 5. Press (q) to quit
 
 
-![gif](img/example_startup.gif)
+![gif](img/start_se.gif)
 
-An important variable is `choose_dataset` on line 23 in the file `widget_new.py`
+#### The search engine itself
+
+![gif](img/se.gif)
+
+An important variable is `choose_dataset` on line 28 in the file `widget_new.py` and on line 30 in the file `main.py`. On default this variable is set to `demo`, the user must change and save the variable in both file manually and run the `python main.py` command again in the command promt in order for JuNocta to work with a different dataset (for example `1`, `2` or `3`).
 
 
 <p align="right">(<a href="#top">back to top</a>)</p>
