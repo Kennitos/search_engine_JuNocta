@@ -17,7 +17,14 @@
       <li><a href="#installation">Installation</a></li>
     </ul>
   </li>
-  <li><a href="#usage">Usage</a></li>
+  <li>
+    <a href="#usage">Usage</a>
+    <ul>
+      <li><a href="#interactive-start-menu">Interactive start menu cmd</a></li>
+      <li><a href="#the-search-engine-itself">The search engine application</a></li>
+    </ul>
+  </li>
+  <li><a href="#license">License</a></li>
   <li><a href="#contact">Contact</a></li>
 </ol>
 
@@ -124,7 +131,7 @@ An important variable is `choose_dataset` on line 28 in the file `widget_new.py`
 
 ## Usage
 
-#### Interactive start menu
+### Interactive start menu
 After the user has run the `main.py` command, the user is met with an interactive shell in which 5 options presented:
 1. Press (1) to run all the following options consecutively: (2), (3), (4)
 2. Press (2) to clone the repositories,
@@ -135,7 +142,7 @@ After the user has run the `main.py` command, the user is met with an interactiv
 
 ![gif](img/start_se.gif)
 
-#### The search engine itself
+### The search engine itself
 
 When `1` or `4` is pressed, a new window will pop up. This window contains the tkinter application in which the search engine is designed. The search engine provides the user with a entry box to type the query. After which the user can either click on the search button or press the `enter` button on his keyboard. As explained earlier, the search engine provides six functionalities when searching
 1. Using the 'cell_type' dropdown menu to choose a cell_type (`markdown`, `code`, `raw` or `heading`)
@@ -163,9 +170,15 @@ When the user closes the tkinter application by clicking the topright closebutto
 To find more information about this project, you can read the thesis [here](thesis.pdf)
 <p align="right">(<a href="#top">back to top</a>)</p>
 
+## License
+
+Distributed under the GNU GPLv3 License. See LICENSE.md for more information.
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
 ## Contact
 
-Your Name - @your_twitter - email@example.com
+Kennet - tisuke_tennek@tutanota.com
 
 Project Link: https://github.com/kennitos/search_engine_junocta
 
