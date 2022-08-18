@@ -121,6 +121,8 @@ Now open a second command promt and navigate again to the right directory (by us
 python main.py
 ```
 
+An important variable is `choose_dataset` on line 28 in the file `widget_new.py` and on line 30 in the file `main.py`. On default this variable is set to `demo`, the user must change and save the variable in both file manually and run the `python main.py` command again in the command promt in order for JuNocta to work with a different dataset (for example `1`, `2` or `3`).
+
 ## Usage
 
 #### Interactive start menu
@@ -136,9 +138,28 @@ After the user has run the `main.py` command, the user is met with an interactiv
 
 #### The search engine itself
 
-![gif](img/se.gif)
+As explained earlier, the search engine provides six advanced options when searching
+1. Using the 'cell_type' dropdown menu to choose a cell_type (`markdown`, `code`, `raw` or `heading`)
+2. Using the 'output_type' dropdown menu to choose a code output_type (`stream`, `execute_result`,`display_data`, `pyout`, `error`, `pyerr` or `no output`)
+3. Using Boolean operators and parentheses to split queries
+4. Using double quotes to match exact phrases
+5. Using a field followed by a colon to specifiying a field to search within
+6. Using the radiobottoms to choose whether to search for a single cell or whole file
 
-An important variable is `choose_dataset` on line 28 in the file `widget_new.py` and on line 30 in the file `main.py`. On default this variable is set to `demo`, the user must change and save the variable in both file manually and run the `python main.py` command again in the command promt in order for JuNocta to work with a different dataset (for example `1`, `2` or `3`).
+These six advanced options are demonstrated in the image below:
+![gif](img/search_options.gif)
+
+The results are separeted with a grey row and each result has multiple links:
+1. A link to the GitHub user
+2. A link to the GitHub repository
+3. A link to the file on GitHub
+4. A link to the file on the localhost/8888
+
+![gif](img/opening_links.gif)
 
 
+
+
+
+To find more information about this project, you can read the thesis [here](thesis.pdf)
 <p align="right">(<a href="#top">back to top</a>)</p>
