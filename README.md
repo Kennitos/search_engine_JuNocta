@@ -18,16 +18,12 @@
     </ul>
   </li>
   <li><a href="#usage">Usage</a></li>
-  <li><a href="#roadmap">Roadmap</a></li>
-  <li><a href="#contributing">Contributing</a></li>
-  <li><a href="#license">License</a></li>
   <li><a href="#contact">Contact</a></li>
-  <li><a href="#acknowledgments">Acknowledgments</a></li>
 </ol>
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
-This search engine, called JuNocta, is designed to work with (large) datasets of Jupyter Notebooks. Jupyter Notebook is a web-based interactive platform, that provides the option to combine code snippets, computational output, explanatory text, visualations and multimedia. A notebook is divided into cells that are displayed below each other, where each cell can run separately. There exist 4 types of cells: `code`, `markdown`, `heading` and `raw`. Notebooks are saved in the JSON structure. This structure represents structured data in the form of attribute-value pairs (key-value pairs) and arrays. The two images below show the same notebook in its web-based platform and in its json structure.
+This search engine, called JuNocta, is designed to search within with (large) datasets of Jupyter Notebooks and is build with Python. Jupyter Notebook is a web-based interactive platform, that provides the option to combine code snippets, computational output, explanatory text, visualations and multimedia. A notebook is divided into cells that are displayed below each other, where each cell can run separately. There exist 4 types of cells: `code`, `markdown`, `heading` and `raw`. Notebooks are saved in the JSON structure. This structure represents structured data in the form of attribute-value pairs (key-value pairs) and arrays. The two images below show the same notebook in its web-based platform and in its json structure.
 
 This is how a notebook is displayed in its JSON structure:
 ![img](img/screenshot_notebook_webbased.jpg?raw=true "Image 1 - web-based")
@@ -37,7 +33,7 @@ This is how the same notebook is displayed on the web-based platform:
 ![img](img/screenshot_notebook_json.jpg?raw=true "Image 2 - json")
 <br/><i>Image 2</i>
 
-But how do you search for a specific notebook within a collection. If a collection of notebooks is stored offline, for example your own laptop, you could use the default file explorer on your operating system. In the file explorer it is possible to search for a filename. In windows 10 it is possible advanced options to search within the content of a file, however this is not 'toepasbaar' op Jupyter Notebook files. If a collection of notebooks is stored on online, for example GitHub, you could use the advanced search provided by GitHub. This does provide the option to search for a filename or within the content, but that is a far as it gets. Most of the advanced filters are related to GitHub characteristics, like amount of stars, repository name, file size or date. 
+But how do you search for a specific notebook file or cell within a collection. If a collection of notebooks is stored offline, for example your own laptop, you could use the default file explorer on your operating system. In the file explorer it is possible to search for a filename. In windows 10 it is possible advanced options to search within the content of a file, however this is not 'toepasbaar' op Jupyter Notebook files. If a collection of notebooks is stored on online, for example GitHub, you could use the advanced search provided by GitHub. This does provide the option to search for a filename or within the content, but that is a far as it gets. Most of the advanced filters are related to GitHub characteristics, like amount of stars, repository name, file size or date. 
 
 The solution to these limited search options, is to create our own search engine. JuNocta has a good understanding of the JSON sturcture when indexing the notebooks. It knows which key-value pairs can be of great value for the search engine and which pairs are abundant. It does not index the notebooks as a whole as text, but is aware of the different cell types. If we look at image 2, this means that not the notebook as a whole (line 1-53) gets indexed as text, but only certain key-value pairs are stored.  The following capabilities/functionalities of JuNocta are developed:
 1. Filter on cell type (choosing between `markdown`, `code`, `raw` or `heading`)
@@ -82,9 +78,10 @@ Three datasets that differ in size and tidiness are used to test JuNocta:
 ### prerequisites
 * [Anaconda](https://www.anaconda.com/products/individual)
   * python+jupyter notebook installer
-   * don't forget to add `python` to the path variables
+  * don't forget to add `python` to the path variables
 * [Java](https://www.java.com/en/download/)
-* [Elastic Search msi installer](https://www.elastic.co/guide/en/elasticsearch/reference/current/windows.html)
+* Elastic Search [version 7.16.1 msi installer](https://www.elastic.co/downloads/past-releases/elasticsearch-7-16-1)
+  * You can also download the newer version 8.*, however there is not a msi installer available for this function. The msi installer tend to be more easy to setup.
   * There are two options during the installation of elasticsearch, regarding starting elasticsearch
        1. always have elasticsearch running in the background
        2. only run elasticsearch after opening it as an admin (**I advise this option**)
@@ -123,6 +120,8 @@ python main.py
 
 An important variable is `choose_dataset` on line 28 in the file `widget_new.py` and on line 30 in the file `main.py`. On default this variable is set to `demo`, the user must change and save the variable in both file manually and run the `python main.py` command again in the command promt in order for JuNocta to work with a different dataset (for example `1`, `2` or `3`).
 
+<p align="right">(<a href="#top">back to top</a>)</p>
+
 ## Usage
 
 #### Interactive start menu
@@ -138,7 +137,7 @@ After the user has run the `main.py` command, the user is met with an interactiv
 
 #### The search engine itself
 
-As explained earlier, the search engine provides six advanced options when searching
+When `1` or `4` is pressed, a new window will pop up. This window contains the tkinter application in which the search engine is designed. The search engine provides the user with a entry box to type the query. After which the user can either click on the search button or press the `enter` button on his keyboard. As explained earlier, the search engine provides six functionalities when searching
 1. Using the 'cell_type' dropdown menu to choose a cell_type (`markdown`, `code`, `raw` or `heading`)
 2. Using the 'output_type' dropdown menu to choose a code output_type (`stream`, `execute_result`,`display_data`, `pyout`, `error`, `pyerr` or `no output`)
 3. Using Boolean operators and parentheses to split queries
@@ -146,20 +145,29 @@ As explained earlier, the search engine provides six advanced options when searc
 5. Using a field followed by a colon to specifiying a field to search within
 6. Using the radiobottoms to choose whether to search for a single cell or whole file
 
-These six advanced options are demonstrated in the image below:
+When searching cell-based and when two cell_type variables in the dropdown menu are chosen, the results should either be on of those two cell types. When search file-based and when two cell_type variables are chosen, each result should contain at least both those two cell types in its file. On default, none of the items in both of the dropdown menu are checked. Meaning the cell_type and output_type will make no differentiation in searching.
+
+These six functionalities are demonstrated in the image below:
 ![gif](img/search_options.gif)
 
-The results are separeted with a grey row and each result has multiple links:
+After the user has clicked the search button or pressed `enter`, the results will be displayed in a scrollable window bellow the entry box. The results are separeted with a grey filled row and each result has multiple clickable links:
 1. A link to the GitHub user
 2. A link to the GitHub repository
 3. A link to the file on GitHub
-4. A link to the file on the localhost/8888
+4. A link to the file on the localhost/8888 to the highlighted text (highlighted text only works on Chrome)
 
 ![gif](img/opening_links.gif)
 
-
-
-
+When the user closes the tkinter application by clicking the topright closebutton, the user is presented with the interactive start menu in the command prompt again. In this menu the user is met with 5 options previously described.
 
 To find more information about this project, you can read the thesis [here](thesis.pdf)
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+## Contact
+
+Your Name - @your_twitter - email@example.com
+
+Project Link: https://github.com/kennitos/search_engine_junocta
+
+
 <p align="right">(<a href="#top">back to top</a>)</p>
