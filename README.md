@@ -105,7 +105,11 @@ Three datasets that differ in size and tidiness are used to test JuNocta:
 Before you can run the ```main.py``` file, two actions need to be performed:
 1. Have the elasticsearch enviroment run in the background
 2. Have the jupyter notebook enviroment run in the background
-   * IT IS IMPORTANT to open jupyter notebook in the same directory in which this folder is cloned to. This is necessary as it not possible to determine 
+   * IT IS IMPORTANT to open jupyter notebook in the directory of this folder that is cloned by you. 
+   
+   This is necassary to create links to files on the localhost/8888. These links consists of two parts: it starts with the standard localhost url (`http://localhost:8888/notebooks/`) and followed by the path to the notebook file (`path/notebook_file`). Here it gets more complicated, as is not always just the path to where the notebook file is stored on your laptop. The path starts with the directory in which the juypter notebook enviroment is opened. This could be vary between different users. Some users might open it by default on the C disk (for example `C:\User\..\search_engine_junocta\demo_dataset\notebook_file`), others on an G disk (for example `G:\..\search_engine_junocta\demo_dataset\notebook_file`), another might it in the same directory in which this folders is cloned (for example `demo_dataset\notebook_file`). Unfortunatelly it is not possible to determine on which directory of a Jupyter notebook is opened. Therefore, to avoid issues it is mandatory for all users to open it in the same way.
+   
+   An example of a link, that is created following the rules, is `http://localhost:8888/notebooks/dataset_demo/(agconti)kaggle-titanic/Titanic.ipynb`. 
 
 There are two ways to navigate to the right directory:
 1. Navigate in the file explorer to where this directory is cloned, when in the right directory type "cmd" in the address bar and press enter. This causes a command prompt to be opened in the right directory.
