@@ -14,7 +14,13 @@
     <a href="#getting-started">Getting Started</a>
     <ul>
       <li><a href="#prerequisites">Prerequisites</a></li>
-      <li><a href="#installation">Installation</a></li>
+      <li>
+      <a href="#installation">Installation</a>
+        <ul>
+        <li><a href="#before-running-the-main-file">Before running the main.py file</a></li>
+        <li><a href="#running-the-main-file">Running the main.py file</a></li>
+        </ul>
+      </li>
     </ul>
   </li>
   <li>
@@ -101,7 +107,7 @@ Three datasets that differ in size and tidiness are used to test JuNocta:
   4. Check the box for "git" and press "apply" in the bottom panel to install this package
 
 ### installation
-#### Before running the main.py file
+#### Before running the `main` file
 Before you can run the ```main.py``` file, two actions need to be performed:
 1. Have the elasticsearch enviroment run in the background
 2. Have the jupyter notebook enviroment run in the background
@@ -123,7 +129,7 @@ jupyter notebook
 ```
 ![gif](img/navigate_option1.gif)
 
-#### Running the main.py file
+#### Running the `main` file
 Now open a second command promt and navigate again to the right directory (by using either of the two options just described) and run the `main.py` file by using the following command:
 ```
 python main.py
