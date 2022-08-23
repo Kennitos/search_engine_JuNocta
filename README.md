@@ -156,7 +156,7 @@ After the user has run the `main.py` command, the user is met with an interactiv
 4. Press (4) to open the search engine,
 5. Press (q) to quit
 
-These options are presentated separately for the user on purpose. For the first time use, the user normally would use option 1 to automatically clone the repositories, setup elasticsearch and open the search engine application. When the the search engine is closed, the cloned repositories will stay on your laptop and indexed dataset into elasticsearch (on localhost:9200) will still be present. Meaning there will be no need to clone the repositories and setup elasticsearch again for a second time, which could be time consuming depending on the size. Therefore option 4 exist.
+These options are presented separately for the user on purpose. For the first time use, the user normally would use option 1 to automatically clone the repositories, setup elasticsearch and open the search engine application. When the the search engine is closed, the cloned repositories will stay on your laptop and the indexed dataset into elasticsearch (on localhost:9200) will still be present. Meaning there will be no need to clone the repositories and setup elasticsearch again for a second time, which could be time consuming depending on the size. Therefore option 4 exists.
 
 ![gif](img/start_se.gif)
 
