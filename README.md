@@ -1,7 +1,14 @@
 <div id="top"></div>
 
 # Jupyter Notebook cell-type aware search engine (JuNocta)
+This project contains a search engine, called JuNocta, that is designed to search within a collection of Jupyter Notebooks. JuNocta is able to distinguish between the different properties of a jupyter notebook cell. JuNocta can use web scraping to create a dataset, use Python pandas to index the dataset and use Elasticsearch to store the dataset locally. JuNocta offers 6 possibilities to make a search more specific. The SERP of JuNocta will provide links to GitHub and/or localhost for each result.
 
+When the requirements are met, the user only has to run a single command in the cmd, to start JuNocta:
+```
+python main.py
+```
+
+## Table of contents
 <!-- TABLE OF CONTENTS -->
 <ol>
   <li>
@@ -149,8 +156,10 @@ After the user has run the `main.py` command, the user is met with an interactiv
 4. Press (4) to open the search engine,
 5. Press (q) to quit
 
+These options are presentated separately for the user on purpose. For the first time use, the user normally would use option 1 to automatically clone the repositories, setup elasticsearch and open the search engine application. When the the search engine is closed, the cloned repositories will stay on your laptop and indexed dataset into elasticsearch (on localhost:9200) will still be present. Meaning there will be no need to clone the repositories and setup elasticsearch again for a second time, which could be time consuming depending on the size. Therefore option 4 exist.
 
 ![gif](img/start_se.gif)
+
 
 ### The search engine itself
 
